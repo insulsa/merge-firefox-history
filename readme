@@ -1,0 +1,8 @@
+usage:
+merge-firefox-history <1> <2>
+both <1> and <2> are sqlite3 databases. <1> is modified. see into it for details.  
+
+depend on sqlite3(1).
+
+tested on firefox versions:
+debian iceweasel 31.6.0
