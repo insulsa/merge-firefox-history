@@ -1,17 +1,14 @@
 #!/bin/sh
 
-# usage:
-# merge-mozilla-history <1> <2>
-# both <1> and <2> are sqlite3 databases. <1> is modified.
-
-# bugs:
-# 1. moz_places(disabled,typed,frecency,last_visit_date) and moz_historyvisits(visit_type,session) are arbitarily assigned with magic numbers.
-# 2. moz_places(favicon_id) have no value thus favicon is not shown.
-# 3. moz_places(url) collisions are silently ignored.
-
-# todo:
-# 1. error handling.
-# 2. test on different firefox versions.
+# SYNOPSIS:
+# merge-firefox-history <db1> <db2>
+# 
+# DESCRIPTION:
+# <db1>  and  <db2>  are  sqlite3  databases,  usually  located  as
+# "places.sqlite".  many records from <db2> are appended to  <db1>.
+# <db1>  IS TO BE MODIFIED. Make back‐up before use. <db2> is read-
+# only.  Layout of the firefox places database is described in
+# https://developer.mozilla.org/en-US/docs/Mozilla/Tech/Places/Database
 
 offset=`sqlite3 $1 "select max(id) from moz_historyvisits;"`
 

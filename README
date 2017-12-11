@@ -1,0 +1,25 @@
+SYNOPSIS:
+merge-firefox-history <db1> <db2>
+
+DESCRIPTION:
+<db1>  and  <db2>  are  sqlite3  databases,  usually  located  as
+"places.sqlite".  many records from <db2> are appended to  <db1>.
+<db1>  IS TO BE MODIFIED. Make back‐up before use. <db2> is read-
+only.  Layout of the firefox places database is described in
+https://developer.mozilla.org/en-US/docs/Mozilla/Tech/Places/Database
+
+DEPENDENCIES:
+sqlite3(1)
+
+BUGS:
+1.  moz_places[disabled,  typed,  frecency,  last_visit_date] and
+moz_historyvisits[visit_type,session] are wrongly assigned.
+2.  Colliding  moz_places[url]  from  <db2> are appended to <db1>
+with moz_places[id] offset. I  believe  they are to  be  combined
+with frecency arithmetics.
+3. No proper handling errors.
+
+HISTORY:
+This programme is tested with the following builds of firefox:
+debian iceweasel 31.6.0 (previous, I no longer install this version)
+debian firefox-esr 45.3.0esr-1 (current)
